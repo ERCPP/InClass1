@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 int main () {
+    //Open max file
+    FILE *fp = fopen("player_max.txt", "r");
+    int max = atoi(fprintf(fp, ""));
     //Create quit condition
     int quit = 0;
     //Set default max
-    int max = 10;
+    if (max < 1) {
+        max = 10;
+    }
+    fclose(fp);
     //Begin loop
     while (quit == 0) {
         char input;
@@ -59,6 +66,10 @@ int main () {
             //update the random number variable with one within the specified range.
             scanf("%d", &maxCandidate);
             if (maxCandidate < 1000) {
+                fp = fopen("player_max.txt", "w+");
+                char tempValue[3] = strcpy("%d", maxCandidate);
+                fputs(tempValue, fp);
+                fclose(fp);
                 max = maxCandidate;
                 printf("New max of %d successfully set.\n", max);
             }
